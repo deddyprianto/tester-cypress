@@ -1,0 +1,19 @@
+{
+    "name": "cypress-test",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test:dev": "cypress run --spec 'cypress/e2e/ga-web.cy.js'",
+        "test:staging": "CYPRESS_BASE_URL=https://staging.yourdomain.com cypress run",
+        "test:prod": "CYPRESS_BASE_URL=https://yourdomain.com cypress run"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "devDependencies": {
+        "cypress": "^15.7.1",
+        "cypress-real-events": "^1.15.0",
+        "dotenv": "^16.4.7"
+    }
+}
+
