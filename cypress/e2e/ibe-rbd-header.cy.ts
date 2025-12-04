@@ -1,8 +1,7 @@
-/// <reference types="Cypress" />
-/// <reference path="../support/index.d.ts" />
+/// <reference types="cypress" />
 
 describe("TESTING", () => {
-    let testData : any;
+    let testData: any;
 
     before(() => {
         cy.fixture("payload").then((data) => {
@@ -11,7 +10,7 @@ describe("TESTING", () => {
     });
 
     beforeEach(() => {
-        const baseUrl = Cypress.env("baseUrlIBE") as string;
+        const baseUrl = (Cypress.config() as any).baseUrlIBE as string;
         cy.visit(`${baseUrl}/search/${testData.searchToken}`);
     });
 
@@ -23,8 +22,10 @@ describe("TESTING", () => {
         cy.toggleSwitch();
         cy.get("#reedemMiles-container").should("exist");
         cy.buttonHit({ identifier: "#basic-button", index: 0 });
-        cy.buttonHit({identifier: '#basic-button', index: 1});
+        cy.buttonHit({ identifier: ".pm-footer", index: 0 });
+        cy.get("#reedemMiles-container").should("not.exist");
     });
 });
+
 
 

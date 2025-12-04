@@ -1,10 +1,7 @@
 const { defineConfig } = require("cypress");
 const dotenv = require("dotenv");
 const path = require("path");
-// import { fileURLToPath } from "url";
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+const webpack = require("@cypress/webpack-preprocessor");
 
 dotenv.config({ path: path.resolve(__dirname, ".env.dev") });
 
@@ -18,6 +15,32 @@ module.exports = defineConfig({
         chromeWebSecurity: false,
         baseUrlIBE: "http://localhost:6970",
         baseUrlGAWEB: "http://localhost:3005/oc/en",
+        setupNodeEvents(on, config) {
+            const options = {
+                webpackOptions: {
+                    resolve: {
+                        extensions: [".ts", ".js"],
+                    },
+                    module: {
+                        rules: [
+                            {
+                                test: /\.ts$/,
+                                exclude: /node_modules/,
+                                use: [
+                                    {
+                                        loader: "ts-loader",
+                                        options: {
+                                            configFile: "cypress/tsconfig.json",
+                                        },
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                },
+            };
+            on("file:preprocessor", webpack(options));
+        },
     },
 
     env: {

@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 /// <reference path="./index.d.ts" />
 
 import "cypress-real-events";
@@ -117,6 +117,7 @@ Cypress.Commands.add("checkFlightType", ({ identifier, flightType }) => {
         cy.get(identifier).should("be.visible").click();
     }
 });
+
 
 
 
