@@ -14,6 +14,10 @@ describe("TESTING", () => {
         const baseUrl = Cypress.config("baseUrlIBE");
         cy.visit(`${baseUrl}/search/${testData.searchToken}`);
     });
+    
+     it("should load search page", () => {
+        cy.url().should("include", "/search/");
+    });
 });
 
 
