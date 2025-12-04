@@ -1,14 +1,14 @@
-import { defineConfig } from "cypress";
-import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
+const { defineConfig } = require("cypress");
+const dotenv = require("dotenv");
+const path = require("path");
+// import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.resolve(__dirname, ".env.dev") });
 
-export default defineConfig({
+module.exports = defineConfig({
     viewportWidth: 1350,
     viewportHeight: 750,
 
@@ -31,3 +31,4 @@ export default defineConfig({
         },
     },
 });
+

@@ -1,3 +1,4 @@
+
 import "./commands";
 Cypress.on("uncaught:exception", (err, runnable) => {
     console.log(runnable);
@@ -13,3 +14,4 @@ Cypress.on("uncaught:exception", (err, runnable) => {
     }
     return true;
 });
+

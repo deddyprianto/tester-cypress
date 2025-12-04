@@ -1,20 +1,23 @@
 /// <reference types="Cypress" />
+/// <reference path="./index.d.ts" />
+
 import "cypress-real-events";
 
 // IBE
-Cypress.Commands.add("selectFlightCard", (identifier, cardIndex) => {
+Cypress.Commands.add("selectFlightCard", ({cardIndex, identifier}) => {
     cy.get(identifier).eq(cardIndex).click();
 });
 
-Cypress.Commands.add("nextButton", (identifier, index, isLast) => {
-    if (isLast) {
-        cy.get(identifier).last().click();
-    } else {
-        cy.get(identifier).eq(index).click();
+Cypress.Commands.add("buttonHit", ({ identifier, index, isLast }) => {
+        if (isLast) {
+            cy.get(identifier).last().click();
+        } else if (index !== undefined) {
+            cy.get(identifier).eq(index).click();
+        }
     }
-});
+);
 
-Cypress.Commands.add("fillPassengerData", (identifier, index, data) => {
+Cypress.Commands.add("fillPassengerData", ({data,identifier,index}) => {
     cy.get(identifier).eq(index).type(data);
 });
 
@@ -23,11 +26,13 @@ Cypress.Commands.add("acceptTerms", () => {
 });
 
 Cypress.Commands.add("toggleSwitch", () => {
-    cy.get(".MuiSwitch-root input").click({ force: true });
+    cy.get(".PrivateSwitchBase-input").click({ force: true });
 });
 
-Cypress.Commands.add("selectBirthDate", (year, month = 0, index) => {
-    cy.get(".MuiPickersCalendarHeader-labelContainer, .MuiPickersCalendarHeader-label").eq(index).click();
+Cypress.Commands.add("selectBirthDate", ({year, month = 0, index}) => {
+    if (index) {
+        cy.get(".MuiPickersCalendarHeader-labelContainer, .MuiPickersCalendarHeader-label").eq(index).click();
+    }
     const yearButtonIndex = 2024 - year + 105;
     console.log(yearButtonIndex);
     cy.get(`.MuiPickersYear-yearButton`).contains(year.toString()).click();
@@ -48,7 +53,7 @@ Cypress.Commands.add("removeBanner", () => {
     cy.get(".button-container > .MuiButton-contained").click();
 });
 
-Cypress.Commands.add("entryPoint", (buttonIndex, isTicketing) => {
+Cypress.Commands.add("entryPoint", ({buttonIndex,isTicketing}) => {
     if (isTicketing) {
         cy.get(".form-booking .list-button-flight").find(`:nth-child(${buttonIndex})`).first().click();
     } else {
@@ -56,12 +61,12 @@ Cypress.Commands.add("entryPoint", (buttonIndex, isTicketing) => {
     }
 });
 
-Cypress.Commands.add("entryPointInput", (indentifier, fieldIndex, value) => {
-    cy.get(`${indentifier} .MuiGrid-item`).eq(fieldIndex).find("input").type(value);
+Cypress.Commands.add("entryPointInput", ({identifier, fieldIndex, value}) => {
+    cy.get(`${identifier} .MuiGrid-item`).eq(fieldIndex).find("input").type(value);
 });
 
-Cypress.Commands.add("entryPointInputAutoComplete", (indentifier, fieldIndex, numberInput, value) => {
-    cy.get(`${indentifier} .MuiGrid-item`)
+Cypress.Commands.add("entryPointInputAutoComplete", ({ identifier, fieldIndex, numberInput, value }) => {
+    cy.get(`${identifier} .MuiGrid-item`)
         .eq(fieldIndex)
         .find("input")
         .eq(numberInput)
@@ -70,8 +75,8 @@ Cypress.Commands.add("entryPointInputAutoComplete", (indentifier, fieldIndex, nu
         .type("{enter}");
 });
 
-Cypress.Commands.add("autoCompleteComplex", (indentifier, fieldIndex, numberInput, value) => {
-    cy.get(`${indentifier} .MuiAutocomplete-root`)
+Cypress.Commands.add("autoCompleteComplex", ({ identifier, fieldIndex, numberInput, value }) => {
+    cy.get(`${identifier} .MuiAutocomplete-root`)
         .eq(fieldIndex)
         .find("input")
         .eq(numberInput)
@@ -80,7 +85,7 @@ Cypress.Commands.add("autoCompleteComplex", (indentifier, fieldIndex, numberInpu
         .realPress("Tab"); // <-- ini meniru tab nyata (trigger blur dan commit)
 });
 
-Cypress.Commands.add("pickupDate", (identifier, dateIndex) => {
+Cypress.Commands.add("pickupDate", ({ identifier, dateIndex }) => {
     cy.get(identifier).should("be.visible").click();
     cy.get(".calendar-content")
         .find(".calender-date-bagus")
@@ -89,7 +94,7 @@ Cypress.Commands.add("pickupDate", (identifier, dateIndex) => {
         .click();
 });
 
-Cypress.Commands.add("buttonEntryPoint", (identifier, isTicketing) => {
+Cypress.Commands.add("buttonEntryPoint", ({ identifier, isTicketing }) => {
     if (isTicketing) {
         cy.get(identifier).first().should("be.visible").click();
     } else {
@@ -97,7 +102,7 @@ Cypress.Commands.add("buttonEntryPoint", (identifier, isTicketing) => {
     }
 });
 
-Cypress.Commands.add("tncCheckBox", (identifier, isvisible, index) => {
+Cypress.Commands.add("tncCheckBox", ({identifier, isvisible, index}) => {
     if (isvisible) {
         cy.get(identifier).should("be.visible").click();
     } else {
@@ -105,11 +110,29 @@ Cypress.Commands.add("tncCheckBox", (identifier, isvisible, index) => {
     }
 });
 
-Cypress.Commands.add("checkFlightType", (identifier, flightType) => {
+Cypress.Commands.add("checkFlightType", ({ identifier, flightType }) => {
     if (flightType === "return") {
         cy.get(identifier).should("be.visible").click();
     } else {
         cy.get(identifier).should("be.visible").click();
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
