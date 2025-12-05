@@ -1,9 +1,7 @@
 {
-    "passenger": {
-        "firstName": "RAIHAN TESTING",
-        "lastName": "prianto",
-        "phone": "085712345678",
-        "email": "deddy@prianto.com"
+    "user": {
+        "milesID": "100000025",
+        "password": "@Garuda2023"
     },
     "birthDate": {
         "year": 1990,

@@ -15,7 +15,7 @@ module.exports = defineConfig({
         chromeWebSecurity: false,
         baseUrlIBE: "http://localhost:6970",
         baseUrlGAWEB: "http://localhost:3005/oc/en",
-        setupNodeEvents(on: any, config:any) {
+        setupNodeEvents(on: any, config: any) {
             const options = {
                 webpackOptions: {
                     resolve: {
@@ -45,6 +45,8 @@ module.exports = defineConfig({
 
     env: {
         uncaughtExceptionHandler: true,
+        RUN_LOGIN: false,
+        RUN_NOT_LOGIN: true,
     },
 
     component: {
@@ -54,4 +56,5 @@ module.exports = defineConfig({
         },
     },
 });
+
 

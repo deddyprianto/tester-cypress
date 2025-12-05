@@ -8,16 +8,19 @@ Cypress.Commands.add("selectFlightCard", ({cardIndex, identifier}) => {
     cy.get(identifier).eq(cardIndex).click();
 });
 
-Cypress.Commands.add("buttonHit", ({ identifier, index, isLast }) => {
+Cypress.Commands.add("buttonHit", ({ identifier, index, isLast ,isForceTrue}) => {
         if (isLast) {
             cy.get(identifier).last().click();
         } else if (index !== undefined) {
+            if (isForceTrue) {
+                cy.get(identifier).eq(index).should("be.visible").should("be.enabled").click({force: true}).should('have.class', "active")
+            }
             cy.get(identifier).eq(index).click();
         }
     }
 );
 
-Cypress.Commands.add("fillPassengerData", ({data,identifier,index}) => {
+Cypress.Commands.add("fillInput", ({data,identifier,index}) => {
     cy.get(identifier).eq(index).type(data);
 });
 

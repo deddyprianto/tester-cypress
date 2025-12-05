@@ -6,12 +6,14 @@ declare global {
                 identifier,
                 index,
                 isLast,
+                isForceTrue,
             }: {
                 identifier: string;
                 index: number;
                 isLast?: boolean;
+                isForceTrue?: boolean;
             }): Chainable<void>;
-            fillPassengerData({
+            fillInput({
                 identifier,
                 index,
                 data,
@@ -74,12 +76,13 @@ declare global {
                 isvisible?: boolean;
                 index: number;
             }): Chainable<void>;
-            checkFlightType({flightType,identifier}:{ identifier: string, flightType: string }): Chainable<void>;
+            checkFlightType({ flightType, identifier }: { identifier: string; flightType: string }): Chainable<void>;
         }
     }
 }
 
 export {};
+
 
 
 
