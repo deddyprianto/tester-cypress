@@ -15,7 +15,7 @@ module.exports = defineConfig({
         chromeWebSecurity: false,
         baseUrlIBE: "http://localhost:6970",
         baseUrlGAWEB: "http://localhost:3005/oc/en",
-        setupNodeEvents(on: any, config: any) {
+        setupNodeEvents(on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions) {
             const options = {
                 webpackOptions: {
                     resolve: {
