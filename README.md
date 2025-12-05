@@ -1,4 +1,4 @@
-# 🧪 Cypress E2E – Home & IBE Ga Website
+# 🧪 Cypress E2E Testing – Home & IBE Ga Website
 
 Repo ini berisi automation testing E2E menggunakan **Cypress** untuk project internal Web Garuda Indonesia.  
 Tujuannya adalah membantu tim Development & QA menjalankan test secara konsisten di environment **Dev**, **Staging**, dan **Production**.
