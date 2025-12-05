@@ -26,7 +26,7 @@ Cypress.Commands.add("acceptTerms", () => {
 });
 
 Cypress.Commands.add("toggleSwitch", () => {
-    cy.get(".PrivateSwitchBase-input").click({ force: true });
+    cy.get(".PrivateSwitchBase-input").first().click({force: true});
 });
 
 Cypress.Commands.add("selectBirthDate", ({year, month = 0, index}) => {
