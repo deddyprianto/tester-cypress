@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 const { defineConfig } = require("cypress");
 const dotenv = require("dotenv");
 const path = require("path");
