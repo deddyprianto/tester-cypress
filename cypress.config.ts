@@ -46,8 +46,8 @@ module.exports = defineConfig({
 
     env: {
         uncaughtExceptionHandler: true,
-        RUN_LOGIN: false,
-        RUN_NOT_LOGIN: true,
+        RUN_LOGIN: true,
+        RUN_NOT_LOGIN: false,
     },
 
     component: {
