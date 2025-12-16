@@ -14,7 +14,7 @@ module.exports = defineConfig({
         experimentalSessionAndOrigin: true,
         defaultCommandTimeout: 10000,
         chromeWebSecurity: false,
-        baseUrlIBE: "http://localhost:6970",
+        baseUrlIBE: "https://ga-ibe-dev.asyst.co.id",
         baseUrlGAWEB: "http://localhost:3005/oc/en",
         setupNodeEvents(on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions) {
             const options = {
@@ -46,8 +46,8 @@ module.exports = defineConfig({
 
     env: {
         uncaughtExceptionHandler: true,
-        RUN_LOGIN: true,
-        RUN_NOT_LOGIN: false,
+        RUN_LOGIN: false,
+        RUN_NOT_LOGIN: true,
     },
 
     component: {
@@ -57,5 +57,6 @@ module.exports = defineConfig({
         },
     },
 });
+
 
 
