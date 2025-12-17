@@ -17,13 +17,18 @@ describe("TESTING", () => {
     it("should login state", function () {
         if (!Cypress.env("RUN_LOGIN")) this.skip();
         cy.url().should("include", "/search/");
-        cy.wait(5000);
+        cy.wait(2000);
         cy.toggleSwitch();
         cy.get("#reedemMiles-container").should("exist");
-            cy.get(".subclass-info-price-value")
-                .should("exist")
-                .should("be.visible")
-                .contains("Sold Out", { matchCase: true });
+        cy.get(".subclass-info-price-value")
+            .should("exist")
+            .should("be.visible")
+            .contains("Sold Out", { matchCase: true });
+        cy.toggleSwitch();
+        cy.get(".subclass-info-price-value")
+            .should("exist")
+            .should("be.visible")
+            .contains("1,919,920", { matchCase: true });
     });
 
     it("should not login state", function () {
@@ -48,5 +53,3 @@ describe("TESTING", () => {
             .contains("Sold Out", { matchCase: true });
     });
 });
-
-
