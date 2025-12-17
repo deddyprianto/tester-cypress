@@ -2,7 +2,7 @@
     "name": "cypress-test",
     "version": "1.0.0",
     "scripts": {
-        "test:dev": "cypress run --spec 'cypress/e2e/ibe-rbd-header.cy.ts'",
+        "test:spec": "cypress run --spec 'cypress/e2e/ibe-rbd-header.cy.ts'",
         "test:staging": "CYPRESS_BASE_URL=https://ga-ibe-stg.asyst.co.id cypress run",
         "test:prod": "CYPRESS_BASE_URL=https://ibe.garuda-indonesia.com cypress run",
         "test-ui-cypress": "cypress open"
