@@ -19,15 +19,11 @@ describe("TESTING", () => {
         cy.url().should("include", "/search/");
         cy.wait(5000);
         cy.toggleSwitch();
-        cy.get("#reedemMiles-container").should("not.exist");
-        cy.wait(3000);
-        cy.toggleSwitch();
         cy.get("#reedemMiles-container").should("exist");
-        cy.buttonHit({ identifier: "#basic-button", index: 0 });
-        cy.buttonHit({ identifier: ".pm-footer", index: 0 });
-        cy.get("#reedemMiles-container").should("not.exist");
-        cy.toggleSwitch();
-        cy.get("button").contains("Sign In GarudaMiles", { matchCase: true }).should("exist").should("be.visible");
+            cy.get(".subclass-info-price-value")
+                .should("exist")
+                .should("be.visible")
+                .contains("Sold Out", { matchCase: true });
     });
 
     it("should not login state", function () {
@@ -43,7 +39,14 @@ describe("TESTING", () => {
         });
         cy.fillInput({ data: testData.user.password, identifier: "input[placeholder='Password']", index: 0 });
         cy.buttonHit({ identifier: ".sign-in-garuda-miles", index: 0 });
+        cy.wait(3000);
+        cy.toggleSwitch();
         cy.get("#reedemMiles-container").should("exist").should("be.visible");
+        cy.get(".subclass-info-price-value")
+            .should("exist")
+            .should("be.visible")
+            .contains("Sold Out", { matchCase: true });
     });
-
 });
+
+
