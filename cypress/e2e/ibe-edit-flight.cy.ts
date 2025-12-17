@@ -14,7 +14,7 @@ describe("TESTING", () => {
         cy.visit(`${baseUrl}/search/${testData.searchToken}`);
     });
 
-    it("check check performance after edit flight and check the button Join GarudaMiles", function () {
+    it("check performance after edit flight and check the button Join GarudaMiles", function () {
         cy.get(".departure-location").contains("Jakarta", { matchCase: true }).should("be.visible");
         cy.buttonHit({ identifier: ".MuiButtonBase-root:has(.light-blue)", index: 0 });
         cy.buttonHit({ identifier: ".switch-origin", index: 0 });
@@ -26,7 +26,7 @@ describe("TESTING", () => {
         cy.buttonHit({ identifier: '.MuiButtonBase-root:has(p:contains("Finish"))', index: 0 });
         cy.buttonHit({ identifier: ".MuiButtonBase-root:has(.light-white)", index: 0 });
         cy.toggleSwitch();
-        cy.buttonHit({ identifier: '.MuiBox-root:contains("Join GarudaMiles")', index: 0 });
+        cy.buttonHit({ identifier: ".join-garuda-miles", index: 0 });
     })
 
 });
