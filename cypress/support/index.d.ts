@@ -77,6 +77,7 @@ declare global {
                 index: number;
             }): Chainable<void>;
             checkFlightType({ flightType, identifier }: { identifier: string; flightType: string }): Chainable<void>;
+            checkWording({ identifier }: { identifier: string , wording: string, isExist: boolean}): Chainable<void>;
         }
     }
 }

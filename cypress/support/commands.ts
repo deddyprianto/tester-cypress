@@ -48,6 +48,13 @@ Cypress.Commands.add("confirmBooking", () => {
         .contains(/confirm|konfirmasi/i)
         .click();
 });
+Cypress.Commands.add("checkWording", ({identifier, wording, isExist}) => {
+    if (isExist) {
+        cy.get(identifier).contains(wording, { matchCase: true }).should("exist").should("be.visible");
+    } else {
+        cy.get(identifier).contains(wording, { matchCase: true }).should("not.exist").should("not.be.visible");
+    }
+});
 
 // GAWEB
 // TnC
@@ -119,4 +126,6 @@ Cypress.Commands.add("checkFlightType", ({ identifier, flightType }) => {
     } else {
         cy.get(identifier).should("be.visible").click();
     }
+
+
 });

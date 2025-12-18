@@ -14,17 +14,6 @@ describe("TESTING", () => {
         cy.visit(`${baseUrl}/search/${testData.searchToken}`);
     });
 
-    it("should login state", function () {
-        if (!Cypress.env("RUN_LOGIN")) this.skip();
-        cy.url().should("include", "/search/");
-        cy.wait(2000);
-        cy.toggleSwitch();
-        cy.get("#reedemMiles-container").should("exist");
-        cy.get(".subclass-info-price-value").contains("Sold Out", { matchCase: true }).should("exist").should("be.visible")
-        cy.toggleSwitch();
-        cy.get(".subclass-info-price-value").contains("1,919,920", { matchCase: true }).should("exist").should("be.visible")
-    });
-
     it("should not login state", function () {
         if (!Cypress.env("RUN_NOT_LOGIN")) this.skip();
         cy.url().should("include", "/search/");
@@ -45,5 +34,16 @@ describe("TESTING", () => {
             .should("exist")
             .should("be.visible")
             .contains("Sold Out", { matchCase: true });
+    });
+
+    it("should login state", function () {
+        if (!Cypress.env("RUN_LOGIN")) this.skip();
+        cy.url().should("include", "/search/");
+        cy.wait(2000);
+        cy.toggleSwitch();
+        cy.get("#reedemMiles-container").should("exist");
+        cy.checkWording({ identifier: ".subclass-info-price-value", wording: "Sold Out", isExist: true });
+        cy.toggleSwitch();
+        cy.checkWording({ identifier: ".subclass-info-price-value", wording: "1,919,920", isExist: true });
     });
 });
