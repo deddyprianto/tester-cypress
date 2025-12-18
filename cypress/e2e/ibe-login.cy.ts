@@ -15,14 +15,14 @@ describe("TESTING", () => {
     });
 
     it("should login state", function () {
-        if (!Cypress.env("RUN_LOGIN")) this.skip();
         cy.url().should("include", "/search/");
         cy.wait(2000);
         cy.toggleSwitch();
         cy.get("#reedemMiles-container").should("exist");
-        cy.checkWording({ identifier: ".subclass-info-price-value", wording: "Sold Out", isExist: true });
+        cy.checkWording({ identifier: ".flight-date-options-currency", wording: "Available", isExist: true });
         cy.toggleSwitch();
-        cy.checkWording({ identifier: ".subclass-info-price-value", wording: "1,919,920", isExist: true });
+        cy.checkWording({ identifier: ".flight-date-options-currency", wording: "IDR", isExist: true });
     });
 });
+
 

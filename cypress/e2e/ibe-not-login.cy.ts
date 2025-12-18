@@ -15,7 +15,6 @@ describe("TESTING", () => {
     });
 
     it("should not login state", function () {
-        if (!Cypress.env("RUN_NOT_LOGIN")) this.skip();
         cy.url().should("include", "/search/");
         cy.wait(5000);
         cy.get("#reedemMiles-container").should("not.exist");
