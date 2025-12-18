@@ -20,15 +20,9 @@ describe("TESTING", () => {
         cy.wait(2000);
         cy.toggleSwitch();
         cy.get("#reedemMiles-container").should("exist");
-        cy.get(".subclass-info-price-value")
-            .should("exist")
-            .should("be.visible")
-            .contains("Sold Out", { matchCase: true });
+        cy.get(".subclass-info-price-value").contains("Sold Out", { matchCase: true }).should("exist").should("be.visible")
         cy.toggleSwitch();
-        cy.get(".subclass-info-price-value")
-            .should("exist")
-            .should("be.visible")
-            .contains("1,919,920", { matchCase: true });
+        cy.get(".subclass-info-price-value").contains("1,919,920", { matchCase: true }).should("exist").should("be.visible")
     });
 
     it("should not login state", function () {
