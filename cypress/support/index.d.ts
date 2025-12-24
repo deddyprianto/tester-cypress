@@ -17,13 +17,15 @@ declare global {
                 identifier,
                 index,
                 data,
+                isForce,
             }: {
                 identifier: string;
                 index: number;
                 data: string;
+                isForce?: boolean;
             }): Chainable<void>;
             acceptTerms(): Chainable<void>;
-            toggleSwitch(): Chainable<void>;
+            toggleSwitch({ identifier }: { identifier?: string } = {}): Chainable<void>;
             selectBirthDate({ year, month, index }: { year: number; month?: number; index?: number }): Chainable<void>;
             confirmBooking(): Chainable<void>;
             removeBanner(): Chainable<void>;
@@ -77,18 +79,10 @@ declare global {
                 index: number;
             }): Chainable<void>;
             checkFlightType({ flightType, identifier }: { identifier: string; flightType: string }): Chainable<void>;
-            checkWording({ identifier }: { identifier: string , wording: string, isExist: boolean}): Chainable<void>;
+            checkWording({ identifier }: { identifier: string; wording: string; isExist: boolean }): Chainable<void>;
         }
     }
 }
 
 export {};
-
-
-
-
-
-
-
-
 

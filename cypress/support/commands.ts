@@ -4,35 +4,47 @@
 import "cypress-real-events";
 
 // IBE
-Cypress.Commands.add("selectFlightCard", ({cardIndex, identifier}) => {
+Cypress.Commands.add("selectFlightCard", ({ cardIndex, identifier }) => {
     cy.get(identifier).eq(cardIndex).click();
 });
 
-Cypress.Commands.add("buttonHit", ({ identifier, index, isLast ,isForceTrue}) => {
-        if (isLast) {
-            cy.get(identifier).last().click();
-        } else if (index !== undefined) {
-            if (isForceTrue) {
-                cy.get(identifier).eq(index).should("be.visible").should("be.enabled").click({force: true}).should('have.class', "active")
-            }
-            cy.get(identifier).eq(index).click();
+Cypress.Commands.add("buttonHit", ({ identifier, index, isLast, isForceTrue }) => {
+    if (isLast) {
+        cy.get(identifier).last().click();
+    } else if (index !== undefined) {
+        if (isForceTrue) {
+            cy.get(identifier)
+                .eq(index)
+                .should("be.visible")
+                .should("be.enabled")
+                .click({ force: true })
+                .should("have.class", "active");
         }
+        cy.get(identifier).eq(index).click();
     }
-);
+});
 
-Cypress.Commands.add("fillInput", ({data,identifier,index}) => {
-    cy.get(identifier).eq(index).type(data);
+Cypress.Commands.add("fillInput", ({ data, identifier, index, isForce }) => {
+    if (isForce) {
+        cy.get(identifier).eq(index).clear({ force: true }).type(`${data}{enter}`, { force: true });
+    } else {
+        cy.get(identifier).eq(index).type(data);
+    }
 });
 
 Cypress.Commands.add("acceptTerms", () => {
     cy.get('input[type="checkbox"]').first().check({ force: true });
 });
 
-Cypress.Commands.add("toggleSwitch", () => {
-    cy.get(".PrivateSwitchBase-input").first().click({force: true});
+Cypress.Commands.add("toggleSwitch", ({ identifier }) => {
+    if (identifier) {
+        cy.get(identifier).first().click({ force: true });
+    } else {
+        cy.get(".PrivateSwitchBase-input").first().click({ force: true });
+    }
 });
 
-Cypress.Commands.add("selectBirthDate", ({year, month = 0, index}) => {
+Cypress.Commands.add("selectBirthDate", ({ year, month = 0, index }) => {
     if (index) {
         cy.get(".MuiPickersCalendarHeader-labelContainer, .MuiPickersCalendarHeader-label").eq(index).click();
     }
@@ -48,7 +60,7 @@ Cypress.Commands.add("confirmBooking", () => {
         .contains(/confirm|konfirmasi/i)
         .click();
 });
-Cypress.Commands.add("checkWording", ({identifier, wording, isExist}) => {
+Cypress.Commands.add("checkWording", ({ identifier, wording, isExist }) => {
     if (isExist) {
         cy.get(identifier).contains(wording, { matchCase: true }).should("exist").should("be.visible");
     } else {
@@ -63,7 +75,7 @@ Cypress.Commands.add("removeBanner", () => {
     cy.get(".button-container > .MuiButton-contained").click();
 });
 
-Cypress.Commands.add("entryPoint", ({buttonIndex,isTicketing}) => {
+Cypress.Commands.add("entryPoint", ({ buttonIndex, isTicketing }) => {
     if (isTicketing) {
         cy.get(".form-booking .list-button-flight").find(`:nth-child(${buttonIndex})`).first().click();
     } else {
@@ -71,7 +83,7 @@ Cypress.Commands.add("entryPoint", ({buttonIndex,isTicketing}) => {
     }
 });
 
-Cypress.Commands.add("entryPointInput", ({identifier, fieldIndex, value}) => {
+Cypress.Commands.add("entryPointInput", ({ identifier, fieldIndex, value }) => {
     cy.get(`${identifier} .MuiGrid-item`).eq(fieldIndex).find("input").type(value);
 });
 
@@ -112,7 +124,7 @@ Cypress.Commands.add("buttonEntryPoint", ({ identifier, isTicketing }) => {
     }
 });
 
-Cypress.Commands.add("tncCheckBox", ({identifier, isvisible, index}) => {
+Cypress.Commands.add("tncCheckBox", ({ identifier, isvisible, index }) => {
     if (isvisible) {
         cy.get(identifier).should("be.visible").click();
     } else {
@@ -126,6 +138,4 @@ Cypress.Commands.add("checkFlightType", ({ identifier, flightType }) => {
     } else {
         cy.get(identifier).should("be.visible").click();
     }
-
-
 });
